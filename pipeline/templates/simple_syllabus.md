@@ -101,7 +101,7 @@ A small study on a page you already know how to build, using a tool taught in th
 2. The prediction written at the midterm check-in (say so if the question changed).
 3. One result sentence and one figure or table that comes from a file.
 4. One limitation, including what your *n* can and cannot support.
-5. A CSV in `data/` if you collected any, or the line `no new data`.
+5. A CSV in that week’s folder if you collected any, or the line `no new data`.
 6. An AI disclosure, or `no Copilot tonight`.
 7. A short in-class **presentation** of that page on the last class meeting (2 December). The presentation is one component of the 35% project score, not a separate exam and not a sit-down test.
 
@@ -190,7 +190,7 @@ Free editor assistance is allowed. Paid Copilot or any paid AI plan is not requi
 
 ## Representative evaluative material
 
-Past and representative work is the public handbook (laboratory pages, `lab-notes/TEMPLATE.md`, sample CSVs in `data/`, and the Week 1 playground). That satisfies access to evaluative material: students see the exact form of a report before they write one.
+Past and representative work is the public handbook (laboratory pages, sample CSVs in `data/`, and the Week 1 playground). Weekly reports are `README.md` in that week’s folder on the private studio repo.
 
 ---
 

@@ -30,7 +30,7 @@
           tool and one ordinary psychology example. The University is closed
           30 September. Reading Week includes 11 November. Weekly reports
           (weeks 1–9) are due the following Tuesday at 17:00; drop the lowest.
-          Copy <a href="lab-notes/TEMPLATE.md">lab-notes/TEMPLATE.md</a>.
+          Each week’s report is <code>README.md</code> in that week’s folder.
         </p>
         <div class="equation">
           50% weekly reports · 15% midterm check-in · 35% individual final
@@ -156,31 +156,35 @@
           <div class="when">Week 3 · Wednesday 16 September 2026</div>
           <a href="inventory.html">inventory.html</a>
         </div>
-        <h2>Tool: a form, a score, and a data table</h2>
+        <h2>Tool: VS Code folders, then edit a hardcoded instrument</h2>
         <p class="muted">
-          Example: a ten-item teaching inventory with two items in each of five
-          domains. Likert responses, reverse scoring, subscale means, CSV.
-          This is a classroom instrument, not a clinical scale.
+          First hour: clone the private repo and move Week 2 into
+          <code>week02-rt/</code>. Then a ten-item teaching inventory — but
+          every student edits their <em>own copy</em>
+          (<code>week03-inventory/inventory.html</code> +
+          <code>inventory.css</code>, already in the repo) so all ten items
+          are their own wording. Likert responses, reverse scoring, subscale
+          means, CSV. Classroom instrument, not a clinical scale.
         </p>
         <div class="agenda">
           <dl>
-            <dt>18:00 Introduction</dt>
-            <dd>Self-report as data, not as a diagnosis. Write a predicted range for one subscale.</dd>
-            <dt>18:25 Demonstration</dt>
-            <dd>Complete the scale once as a class walk-through. Export.</dd>
-            <dt>18:40 Exercise</dt>
-            <dd>Students complete the inventory and save their table.</dd>
+            <dt>18:00 VS Code</dt>
+            <dd>Install if needed. Clone <code>kylemath/psych302-305-YOURUSERNAME</code> (not a handbook fork). Rearrange Week 2 into <code>week02-rt/</code>.</dd>
+            <dt>18:40 Introduction</dt>
+            <dd>Self-report as data, not as a diagnosis. Open <code>week03-inventory/inventory.html</code> and find the <code>ITEMS</code> array — a hardcoded list, not a database.</dd>
+            <dt>19:00 Demonstration</dt>
+            <dd>Complete the class version once as a walk-through (<a href="inventory.html">inventory.html</a>). Then rewrite one item live to show the edit-save-reload loop.</dd>
           </dl>
           <dl>
-            <dt>19:25 Results</dt>
-            <dd>Report one subscale mean and what it is (and is not) a measure of.</dd>
+            <dt>19:25 Exercise</dt>
+            <dd>Rewrite all ten items in your own copy (5 domains, 2 items, one reverse per pair). Write the prediction in <code>README.md</code> before scoring your own version.</dd>
             <dt>20:05 Modification</dt>
-            <dd>Check a reverse-scored item by hand, and you may tighten wording and layout of the items.</dd>
-            <dt>Reading</dt>
-            <dd>A short scale-construction note from the instructor.</dd>
+            <dd>Discussion prompt while you finish: was hand-editing ten strings inside a script tag tedious? What would you rather the items lived in?</dd>
+            <dt>20:45 Discussion</dt>
+            <dd>Commit, Sync — both <code>inventory.html</code> <em>and</em> <code>inventory.css</code> — and where the Canvas paste goes (due Tuesday).</dd>
           </dl>
         </div>
-        <p class="muted"><strong>Report:</strong> in VS Code, one subscale, item count, one limitation of self-report. CSV in <code>data/</code>. <a href="workflow.html">VS Code walkthrough</a>.</p>
+        <p class="muted"><strong>Report:</strong> write <code>week03-inventory/README.md</code> (prediction first, then your own domain, item count, one limitation, and a tedium note). Rewritten <code>inventory.html</code> + <code>inventory.css</code> + CSV in that same folder. <a href="workflow.html#arrange">VS Code walkthrough</a>.</p>
       </article>
 
       <article class="panel meeting" id="w4">
@@ -191,9 +195,10 @@
         <h2>Tool: a report from Markdown, a script, and LaTeX</h2>
         <p class="muted">
           Example: your Week 2 reaction times or Week 3 inventory scores.
-          Write the paper in <code>report/REPORT.md</code>, compute with
-          <code>report/scripts/summarize.py</code>, typeset with
-          <code>report/main.tex</code>. Run, read, change, run again.
+          In <code>week04-report/</code>, write the paper in
+          <code>REPORT.md</code>, compute with
+          <code>scripts/summarize.py</code>, typeset with
+          <code>main.tex</code>. Run, read, change, run again.
           Do not type the mean by hand.
         </p>
         <div class="agenda">
@@ -251,7 +256,7 @@
             <dd>None required beyond the note on the laboratory page.</dd>
           </dl>
         </div>
-        <p class="muted"><strong>Report:</strong> the comparison you wrote at 18:10 and whether the data agreed. Due Tuesday 13 October.</p>
+        <p class="muted"><strong>Report:</strong> write <code>week05-compare/README.md</code> with the comparison you wrote at 18:10 and whether the data agreed. Due Tuesday 13 October.</p>
       </article>
 
       <article class="panel meeting" id="w6">
@@ -282,7 +287,7 @@
             <dd>Library access. No extra article beyond the one you file.</dd>
           </dl>
         </div>
-        <p class="muted"><strong>Report:</strong> <a href="lab-notes/ANNOTATION.md">lab-notes/ANNOTATION.md</a> and a file or URL in <code>papers/</code>.</p>
+        <p class="muted"><strong>Report:</strong> <code>week06-cite/README.md</code> and a file or URL in that folder.</p>
       </article>
 
       <article class="panel meeting" id="w7">
@@ -313,7 +318,7 @@
             <dd>None. Bring your Week 2 or Week 3 CSV.</dd>
           </dl>
         </div>
-        <p class="muted"><strong>Report:</strong> <a href="lab-notes/METHODS.md">lab-notes/METHODS.md</a> in the repository.</p>
+        <p class="muted"><strong>Report:</strong> <code>week07-methods/README.md</code> in the repository.</p>
       </article>
 
       <article class="panel meeting" id="w8">
@@ -324,8 +329,9 @@
         <h2>Tool: a results webpage</h2>
         <p class="muted">
           Example: one claim from your data, a figure, and a paragraph. The
-          graded work tonight is the individual
-          <a href="project/CHECKIN.md">midterm check-in</a>, not a critique.
+          graded work tonight is the individual midterm check-in — fill in
+          <code>week10-project/CHECKIN.md</code>, already in your private
+          repository — not a critique.
         </p>
         <div class="agenda">
           <dl>
@@ -345,7 +351,7 @@
             <dd>Bring a CSV and a one-sentence project idea.</dd>
           </dl>
         </div>
-        <p class="muted"><strong>Due in class:</strong> <a href="project/CHECKIN.md">project/CHECKIN.md</a>. Weekly report: path to the results page and the claim.</p>
+        <p class="muted"><strong>Due in class:</strong> <code>week10-project/CHECKIN.md</code>. Weekly report: path to the results page in <code>week08-results/</code> and the claim.</p>
       </article>
 
       <article class="panel meeting" id="w9">
@@ -366,7 +372,7 @@
             <dt>18:25 Demonstration</dt>
             <dd>Play eight practice trials. Write a predicted false-alarm rate.</dd>
             <dt>18:40 Exercise</dt>
-            <dd>Run a scored block and export the CSV into <code>data/</code>.</dd>
+            <dd>Run a scored block and export the CSV into <code>week09-game/</code>.</dd>
           </dl>
           <dl>
             <dt>19:25 Results</dt>
@@ -460,7 +466,7 @@
         <div class="agenda">
           <dl>
             <dt>18:00</dt>
-            <dd>Push the page and <a href="project/FINAL.md">project/FINAL.md</a> checklist.</dd>
+            <dd>Push the page and your filled <code>week10-project/FINAL.md</code> checklist.</dd>
             <dt>18:15–20:45</dt>
             <dd>Short presentations. Everyone presents. The talk is 5 of the 35 project points.</dd>
             <dt>20:45–21:00</dt>

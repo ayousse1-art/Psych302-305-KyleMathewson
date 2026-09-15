@@ -42,10 +42,10 @@ WEEKLIES = [
         "meet": "16 September",
         "lab": f"{BOOK}/inventory.html",
         "lab_label": "Week 3 inventory",
-        "note_path": "lab-notes/week03.md",
-        "ask": "One subscale mean, item count, and one limitation of self-report. CSV in data/.",
+        "note_path": "week03-inventory/README.md",
+        "ask": "Which domain you named, its mean after reverse scoring, item count (2), one limitation of self-report, and a sentence on the tedium of hand-editing ten hardcoded items.",
         "module": "Week 3 · Inventory (16 Sep)",
-        "preamble": "From this week, work in Visual Studio Code on your laptop (GitHub Codespaces is not used). Run the teaching inventory on the laboratory page, export the CSV into <code>data/</code>, and report one subscale.",
+        "preamble": "First in-class VS Code session. Clone <code>kylemath/psych302-305-YOURUSERNAME</code> (not a handbook fork). Move Week 2 into <code>week02-rt/</code>. Rewrite all ten items in your own <code>week03-inventory/inventory.html</code> (plus its <code>inventory.css</code>), then write the report in that folder’s <code>README.md</code>.",
     },
     {
         "n": 4,
@@ -55,10 +55,10 @@ WEEKLIES = [
         "meet": "23 September",
         "lab": f"{BOOK}/report.html",
         "lab_label": "Week 4 research reports",
-        "note_path": "lab-notes/week04.md",
-        "ask": "Paths to REPORT.md, summarize.py, the generated snippet, and main.tex. Name one change after the first build. Due 29 September (no class 30 September).",
+        "note_path": "week04-report/README.md",
+        "ask": "Paths to the Markdown, the script, the generated snippet, and main.tex, all under week04-report/. Name one change after the first build. Due 29 September (no class 30 September).",
         "module": "Week 4 · Research reports (23 Sep)",
-        "preamble": "In the VS Code terminal, build the report from your own CSV. Do not type a mean by hand. No class 30 September.",
+        "preamble": "Make <code>week04-report/</code> in VS Code. Build the report from your own CSV. Do not type a mean by hand. No class 30 September.",
     },
     {
         "n": 5,
@@ -68,7 +68,7 @@ WEEKLIES = [
         "meet": "7 October",
         "lab": f"{BOOK}/compare.html",
         "lab_label": "Week 5 comparison",
-        "note_path": "lab-notes/week05.md",
+        "note_path": "week05-compare/README.md",
         "ask": "The comparison you wrote before looking, two means, two ns, and whether the data agreed.",
         "module": "Week 5 · Comparison (7 Oct)",
         "preamble": "Write the comparison <em>before</em> you look at the two means.",
@@ -81,10 +81,10 @@ WEEKLIES = [
         "meet": "14 October",
         "lab": f"{BOOK}/cite.html",
         "lab_label": "Week 6 citation",
-        "note_path": "lab-notes/week06.md",
-        "ask": "Complete reference, path or URL in papers/, and the question / method / one limit.",
+        "note_path": "week06-cite/README.md",
+        "ask": "Complete reference, path or URL to the paper in week06-cite/, and the question / method / one limit.",
         "module": "Week 6 · Citation (14 Oct)",
-        "preamble": "Find, cite, and file one paper. Put the PDF or a stable URL under <code>papers/</code>.",
+        "preamble": "Find, cite, and file one paper. Put the PDF or a stable URL in <code>week06-cite/</code> with the report.",
     },
     {
         "n": 7,
@@ -94,8 +94,8 @@ WEEKLIES = [
         "meet": "21 October",
         "lab": f"{BOOK}/methods.html",
         "lab_label": "Week 7 Methods",
-        "note_path": "lab-notes/week07.md",
-        "ask": "Path to your Methods file. Timing, keys, and exclusion rules in numbers.",
+        "note_path": "week07-methods/README.md",
+        "ask": "Path to week07-methods/README.md. Timing, keys, and exclusion rules in numbers.",
         "module": "Week 7 · Methods (21 Oct)",
         "preamble": "Document a procedure you already ran so a stranger could repeat it.",
     },
@@ -107,8 +107,8 @@ WEEKLIES = [
         "meet": "28 October",
         "lab": f"{BOOK}/results.html",
         "lab_label": "Week 8 results page",
-        "note_path": "lab-notes/week08.md",
-        "ask": "Path to the results page and the claim. The 15% check-in is a separate assignment.",
+        "note_path": "week08-results/README.md",
+        "ask": "Path to the results page in week08-results/ and the claim. The 15% check-in is a separate assignment.",
         "module": "Week 8 · Results and check-in (28 Oct)",
         "preamble": "One claim and one figure or table on a results page. The midterm check-in is a separate Canvas box.",
     },
@@ -120,7 +120,7 @@ WEEKLIES = [
         "meet": "4 November",
         "lab": f"{BOOK}/game.html",
         "lab_label": "Week 9 gamified research",
-        "note_path": "lab-notes/week09.md",
+        "note_path": "week09-game/README.md",
         "ask": "Your question of interest, the game as the instrument, what was logged (including the extra logged variable). Last weekly report.",
         "module": "Week 9 · Gamified research (4 Nov)",
         "preamble": "A browser game that studies a question. Last weekly report.",
@@ -142,6 +142,8 @@ def weekly_description(read_template, row: dict) -> str:
         tpl = read_template("week1_report.html")
     elif row["n"] == 2:
         tpl = read_template("week2_report.html")
+    elif row["n"] == 3:
+        tpl = read_template("week3_report.html")
     else:
         tpl = read_template("weekly_report.html")
     return fill(tpl, **{k: str(row[k]) for k in row})

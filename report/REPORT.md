@@ -15,7 +15,7 @@ Write this before you run the script.
 ## Results
 
 <!-- begin generated -->
-Run `python scripts/summarize.py --csv ../data/YOURFILE.csv` from the `report/` folder. This block will be replaced.
+Run `python scripts/summarize.py --csv YOURFILE.csv` from this folder (e.g. `week04-report/`). This block will be replaced.
 <!-- end generated -->
 
 ## Limitation

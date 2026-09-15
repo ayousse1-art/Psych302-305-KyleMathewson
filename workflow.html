@@ -24,38 +24,55 @@
 
       <header class="panel">
         <div class="kicker">Software</div>
-        <h1>Repository, VS Code, and how you submit</h1>
+        <h1>VS Code, one folder per week</h1>
         <p class="lede">
-          The private repo
-          <code>kylemath/psych302-305-USERNAME</code>
-          is where the work lives. You clone it to your laptop and edit in
-          <strong>Visual Studio Code</strong>. Canvas is where you hand it in:
-          each week you paste paths (and the asked lines) on that week’s
-          text-entry assignment, then click Submit. A push that is not pasted
-          is not submitted. A file that exists only on your laptop is not
-          submitted. If Week 0 is still incomplete, submit
-          <a href="https://canvas.ualberta.ca/courses/35483/assignments/812211">the GitHub form</a>
-          and accept the invite. Week 1 was the public homepage lab
-          (<a href="playground.html">playground.html</a>).
-          From Week 2 on, use the private repo and the loop below.
-          GitHub Codespaces is not used this term.
+          Your work lives in the private repo
+          <code>kylemath/psych302-305-YOURUSERNAME</code>
+          (not a fork of this handbook, and not a second repo with a similar
+          name). You clone it once, edit in
+          <strong>Visual Studio Code</strong>, and hand in on Canvas by pasting
+          the path to that week’s <code>README.md</code>.
+          GitHub Codespaces is not used.
         </p>
       </header>
+
+      <section class="panel" id="layout" style="margin-top: 16px">
+        <div class="kicker">Convention from Week 3</div>
+        <h2>One folder per week</h2>
+        <p class="muted">
+          The report is <code>README.md</code> inside the week folder. The CSV
+          and any page you edited go in the same folder. Teaching pages
+          (this site) stay on the handbook — do not copy the course into your
+          repo.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Folder</th><th>What goes in it</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>week02-rt/</code></td><td>Your RT page, CSV, and the Week 2 report</td></tr>
+            <tr><td><code>week03-inventory/</code></td><td>Inventory CSV and the Week 3 report</td></tr>
+            <tr><td><code>week04-report/</code> … <code>week09-game/</code></td><td>Later weeks; make the folder when we get there</td></tr>
+            <tr><td><code>week10-project/</code></td><td>Check-in and final (October–December)</td></tr>
+          </tbody>
+        </table>
+        <p class="muted" style="margin-top: 12px">
+          Week 1 stays on the public repo you already published.
+        </p>
+      </section>
 
       <section class="panel" id="install" style="margin-top: 16px">
         <div class="kicker">Once, on your laptop</div>
         <h2>Install VS Code, Git, and Python 3</h2>
         <p class="muted">
           All three are free. Do not buy Copilot or enter a credit card.
-          Install before you start Week 2.
         </p>
         <ol>
           <li><strong>Visual Studio Code.</strong>
             Download from
             <a href="https://code.visualstudio.com/">code.visualstudio.com</a>
             and install. Open it once so it finishes setup. If it later asks
-            to Reopen in Container, choose <strong>Don’t Reopen</strong> —
-            we work on the laptop, not in a container.</li>
+            to Reopen in Container, choose <strong>Don’t Reopen</strong>.</li>
           <li><strong>Git.</strong>
             <a href="https://git-scm.com/downloads">git-scm.com/downloads</a>.
             On a Mac, if Terminal asks you to install command-line tools,
@@ -75,98 +92,78 @@
         <ol>
           <li>On GitHub, open
             <code>kylemath/psych302-305-YOURUSERNAME</code>
-            and accept the invite if you have not. This is not your Week 1
-            public homepage repo.</li>
+            and accept the invite if you have not. That is not your Week 1
+            public homepage, and it is not your fork of this handbook.</li>
           <li>In VS Code: <strong>View → Command Palette</strong>
             (Mac: Command-Shift-P, Windows: Control-Shift-P) →
             <strong>Git: Clone</strong>. Paste
             <code>https://github.com/kylemath/psych302-305-YOURUSERNAME</code>.
             Sign in to GitHub when asked. Choose a folder you can find again
             (Documents is fine). Open the cloned folder when prompted.</li>
-          <li>The file tree on the left should show
-            <code>lab-notes/</code>, <code>data/</code>, and
-            <code>rt/</code>. That folder is your copy of the repo.</li>
+          <li>The file tree on the left should show a <code>weekNN-…/</code>
+            folder for each week so far. You may still see leftover folders
+            from Weeks 0–2 (<code>lab-notes/</code>, <code>rt/</code>,
+            <code>data/</code>, <code>report/</code>) — see
+            <a href="#arrange">the weekly recipe</a> below for tidying those
+            up.</li>
         </ol>
       </section>
 
-      <section class="panel" id="submit" style="margin-top: 16px">
-        <div class="kicker">Week 2 · VS Code on your laptop</div>
-        <h2>How you work this week</h2>
-        <p class="muted">
-          You edit the note, change the task, and run your own HTML page
-          from the cloned folder. Everyone does the same assignment.
-        </p>
+      <section class="panel" id="arrange" style="margin-top: 16px">
+        <div id="submit"></div>
+        <div class="kicker">Every week, in class</div>
+        <h2>The weekly recipe</h2>
         <ol>
-          <li><strong>Open the cloned repo</strong> in VS Code (File → Open
-            Folder if it is not already open).</li>
-          <li><strong>Make the note.</strong> Open
-            <code>lab-notes/TEMPLATE.md</code>, then File → Save As
-            <code>lab-notes/week02.md</code>. Write your predicted mean
-            <em>now</em>, before any scored trial.</li>
-          <li><strong>Personalize the task.</strong> Open
-            <a href="rt.html">rt.html</a>
-            (this handbook). Modify the sketch so it is clearly yours — look,
-            timing, labels, or procedure — then <strong>Run</strong> and try
-            Practice. A single number change is not enough.
-            <strong>Copy sketch</strong> when you are happy.</li>
-          <li><strong>Paste into your copy.</strong> In VS Code, open
-            <code>rt/rt.html</code> and replace the script (below the paste
-            comment) with what you copied. Save.</li>
-          <li><strong>Serve your copy.</strong> Terminal → New Terminal (leave the working directory at the repo root, the folder that contains <code>lab-notes</code> and <code>rt</code>), then:
-            <code>python3 -m http.server 8765</code>
-            (Windows: <code>py -3 -m http.server 8765</code>).
-            In your browser open
-            <a href="http://127.0.0.1:8765/rt/rt.html">http://127.0.0.1:8765/rt/rt.html</a>.
-            Click the page, Start, run the scored block, Export CSV.</li>
-          <li><strong>Put the CSV in the repo.</strong> Export saves to your
-            laptop’s Downloads folder. Drag that file into the
-            <code>data/</code> folder in VS Code (or copy it there in Finder /
-            File Explorer). Rename it if you like, e.g.
-            <code>data/week02.csv</code>.</li>
-          <li><strong>Finish the note.</strong> Say how you personalized the
-            task, then n, mean RT, SD, and one limitation from the export.</li>
-          <li><strong>Commit and push.</strong> Left sidebar Source Control
-            (branch icon) → message such as <code>week 2 rt</code> →
-            <strong>Commit</strong>, then <strong>Sync</strong> / Push. Leave
-            the server running until you have the CSV; you can stop it with
-            Control-C in the terminal.</li>
-          <li><strong>Hand in on Canvas.</strong> Open
-            <a href="https://canvas.ualberta.ca/courses/35483/assignments/812444">Week 2 · Laboratory report</a>,
-            paste the five asked lines, click <strong>Submit</strong>. A push
-            that is not pasted is not submitted.</li>
+          <li><strong>Open this week’s folder</strong> (make a new
+            <code>weekNN-…</code> folder the first time that week needs
+            one).</li>
+          <li><strong>Do the laboratory</strong> on the handbook page for
+            that week.</li>
+          <li><strong>Write <code>README.md</code></strong> in that folder —
+            prediction first, before you look at a result.</li>
+          <li><strong>Drop any CSV</strong> (and any page you edited, with
+            its stylesheet or other dependencies) into the same folder.</li>
+          <li><strong>Commit and Sync.</strong> Source Control (branch icon)
+            → a short message → <strong>Commit</strong> →
+            <strong>Sync</strong> / Push. Check that every file the page
+            needs (for example a linked <code>.css</code>) is staged, not
+            just the page itself.</li>
+          <li><strong>Hand in on Canvas.</strong> Paste the path to that
+            week’s <code>README.md</code>, the lines that week’s assignment
+            asks for, and your AI disclosure. A push that is not pasted on
+            Canvas is not submitted.</li>
         </ol>
-        <p class="muted">
-          First hour is still the class
-          <a href="p5.html">p5.html</a>
-          studio (lesson only). The class
-          <a href="rt.html">rt.html</a>
-          is the remix sandbox. Your grade is the sketch you paste into
-          <code>rt/rt.html</code>. Rubric:
-          <a href="rubrics.html">rubrics.html</a>.
+        <p class="muted" style="margin-top: 12px">
+          Still have loose Week 0–2 files in the repo root
+          (<code>rt.html</code>, <code>lab-notes/</code>, <code>data/</code>)?
+          Move them into <code>week02-rt/</code> once — after that,
+          everything lives in its own week folder.
+        </p>
+        <p class="muted" style="margin-top: 8px">
+          Each week’s Canvas assignment states that week’s specific files
+          and questions; this recipe does not change week to week.
         </p>
       </section>
 
       <section class="grid-3" style="margin-top: 16px">
         <article class="card">
           <div class="chip gold">Repository</div>
-          <h3>One folder for the term</h3>
+          <h3>One private repo</h3>
           <p>
-            Week 1 used a public repo, Pages, a handbook fork, and a pull
-            request. Weeks 2–9 use the private course repo: notes in
-            <code>lab-notes/</code>, data in <code>data/</code>, generated
-            papers in <code>report/</code>. Week 2 also uses
-            <code>rt/</code>.
+            Instructor-owned, you have write access. The handbook is the
+            lab. Your repo is only your files. Later weeks: make the next
+            <code>weekNN-…</code> folder when that lab starts.
           </p>
         </article>
         <article class="card">
           <div class="chip">VS Code</div>
           <h3>Editor on your laptop</h3>
           <p>
-            Clone the private repo, edit files, run
-            <code>python3 -m http.server 8765</code> in the terminal, then
-            open <em>your</em> <code>rt/rt.html</code> at
-            <code>http://127.0.0.1:8765/rt/rt.html</code>. Commit and Sync
-            from the Source Control sidebar.
+            Clone, edit <code>README.md</code>, drag a CSV, commit, Sync.
+            You only need a local web server when you are testing a page
+            you wrote (Week 2: <code>python3 -m http.server 8765</code> from
+            the repo root, then open
+            <code>http://127.0.0.1:8765/week02-rt/rt.html</code>).
           </p>
         </article>
         <article class="card">
@@ -175,9 +172,8 @@
           <p>
             You may use Copilot or an editor agent to explain a line or draft
             text. You stay the author. You may not paste another student’s
-            data into a prompt. Each report states whether you used it, what
-            you asked, what you kept, and what you changed. If none is
-            available, write “no Copilot tonight.” Do not purchase a plan.
+            data into a prompt. If none is available, write “no Copilot tonight.”
+            Do not purchase a plan.
           </p>
         </article>
       </section>
@@ -190,14 +186,9 @@
             <a href="#install">install</a> and <a href="#clone">clone</a>.</li>
           <li><strong>GitHub Desktop</strong> — clone, commit, and push if
             Source Control in VS Code will not sign in. Still edit files in
-            VS Code and still run the Python server there.</li>
-          <li><strong>Open the HTML file directly</strong> — double-click
-            <code>rt/rt.html</code> if the server will not start. Still put
-            the CSV in <code>data/</code> and still commit and push before
-            Canvas.</li>
+            VS Code.</li>
           <li><strong>github.dev</strong> — press period (.) on GitHub to
-            edit files only. It cannot run the scored block. Come back to
-            VS Code on your laptop for the block.</li>
+            edit Markdown. Come back to VS Code to run a page you wrote.</li>
         </ol>
       </section>
 
@@ -208,17 +199,16 @@
           An agent can propose an edit, run a command, and show you the
           result. That does not make the report its work. You choose the
           question, you keep the files, you read the output, and you decide
-          what stays. The same loop appears in Week 4 without any assistant:
-          edit a file, run a script, read the paper, edit again.
+          what stays.
         </p>
         <div class="grid-2" style="margin-top: 16px">
           <div>
             <h3>Strategies that work in this course</h3>
             <ul class="muted">
-              <li><strong>Small asks.</strong> “Exclude RTs under 150 ms in <code>summarize.py</code>” is better than “write my lab.”</li>
-              <li><strong>Name the file.</strong> Point at <code>report/REPORT.md</code> or <code>data/week02.csv</code>. Do not paste the table into the chat.</li>
+              <li><strong>Small asks.</strong> “Exclude RTs under 150 ms” is better than “write my lab.”</li>
+              <li><strong>Name the file.</strong> Point at this week’s <code>README.md</code> or CSV. Do not paste the table into the chat.</li>
               <li><strong>Run what it wrote.</strong> If you cannot run it, you do not yet have a result.</li>
-              <li><strong>Read the number.</strong> If n is 0 or the mean is 12 ms, the script is wrong. Fix the file, not the sentence.</li>
+              <li><strong>Read the number.</strong> If n is 0 or the mean is 12 ms, the file is wrong. Fix the file, not the sentence.</li>
               <li><strong>Keep a trail.</strong> A commit, or two sentences in the report, of what you asked and what you changed.</li>
             </ul>
           </div>
@@ -228,47 +218,19 @@
               <li>Paste classmate rows, names, or a whole CSV into a prompt.</li>
               <li>Accept a bibliography or a mean you have not opened or recomputed.</li>
               <li>Buy Copilot, Cursor, or any paid plan for this course.</li>
-              <li>Submit a page you cannot explain. If you cannot say what the script excluded, redo that part by hand.</li>
+              <li>Submit a page you cannot explain.</li>
             </ul>
-            <p class="muted">
-              Week 1: we discuss this after the playground. Week 4:
-              <a href="report.html">report.html</a>
-              is the first graded loop. Later weeks: same disclosure on every report.
-            </p>
           </div>
         </div>
       </section>
 
-      <section class="grid-2" style="margin-top: 16px">
-        <article class="panel">
-          <div class="kicker">Git used in this course</div>
-          <h2>Commit, push, and pull</h2>
-          <p class="muted">
-            Week 1 was the first test: public repo, Pages, fork, pull request.
-            Two of those pages stay on the class homepage. From Week 2, commit
-            and push the private repo from VS Code, then paste on Canvas.
-            Commit history is not graded.
-          </p>
-        </article>
-        <article class="panel">
-          <div class="kicker">Data and authorship</div>
-          <h2>Classmate data stay in the repository</h2>
-          <p class="muted">
-            Reaction times, accuracy counts, and questionnaire responses belong
-            in <code>data/</code>. Repositories remain private. If you cannot
-            state the limitation of your result without reading the report, revise
-            the report before you push.
-          </p>
-        </article>
-      </section>
-
       <p class="footer">
-        Account setup is the Canvas assignment
+        Account setup:
         <a href="https://canvas.ualberta.ca/courses/35483/assignments/812211">Week 0 · GitHub username</a>.
-        Install and clone:
+        Install:
         <a href="#install">VS Code on your laptop</a>.
-        Weekly hand-in:
-        <a href="#submit">How you submit</a>.
+        Each week:
+        <a href="#arrange">the weekly recipe</a>.
       </p>
     </div>
   </body>

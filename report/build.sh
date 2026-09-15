@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# One pass of the report loop. From the report/ folder:
-#   bash build.sh ../data/yourfile.csv
+# One pass of the report loop. From this folder (e.g. week04-report/):
+#   bash build.sh yourfile.csv
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
 CSV="${1:-}"
 if [[ -z "$CSV" ]]; then
-  echo "usage: bash build.sh ../data/yourfile.csv" >&2
+  echo "usage: bash build.sh yourfile.csv" >&2
   exit 1
 fi
 

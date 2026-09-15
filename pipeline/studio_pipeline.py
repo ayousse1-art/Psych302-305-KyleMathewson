@@ -490,7 +490,7 @@ def _sync_missing_files(username: str, missing: list[str]) -> dict:
                 "git",
                 "commit",
                 "-m",
-                "Add Week 4 report pipeline files (missing template only; no overwrite)",
+                "Add missing studio template files (no overwrite)",
             ],
             cwd=dest,
             check=True,
@@ -670,7 +670,7 @@ def _replace_template_files(username: str, paths: list[str]) -> dict:
         if not staged.stdout.strip():
             return {"action": "skip-complete", "repo": full, "replaced": []}
         subprocess.run(
-            ["git", "commit", "-m", "Update Week 2 RT starter from the class template"],
+            ["git", "commit", "-m", "Update studio files from the class template"],
             cwd=dest,
             check=True,
             capture_output=True,
@@ -685,7 +685,7 @@ def cmd_repos_replace(args: argparse.Namespace) -> None:
     """Overwrite specific template files on existing repos. Regular push; never force-push."""
     paths = [p.strip().lstrip("/") for p in (args.paths or []) if p.strip()]
     if not paths:
-        raise SystemExit("Pass one or more --path values, e.g. --path rt/rt.html")
+        raise SystemExit("Pass one or more --path values, e.g. --path README.md")
     for rel in paths:
         src = STUDENT_TEMPLATE / rel
         if not src.is_file():

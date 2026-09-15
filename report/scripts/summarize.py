@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Read a Week 2 RT or Week 3 inventory CSV and write generated report snippets.
 
-Standard library only. Run from the report/ folder:
+Standard library only. Run from this folder (e.g. week04-report/), with the
+CSV in the same folder or an earlier week's folder:
 
-    python scripts/summarize.py --csv ../data/yourfile.csv
+    python scripts/summarize.py --csv yourfile.csv
+    python scripts/summarize.py --csv ../week02-rt/yourfile.csv
 """
 
 from __future__ import annotations

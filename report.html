@@ -149,20 +149,22 @@
         <div class="kicker">In the private repository</div>
         <h2>Copy the starter, then run the loop</h2>
         <p class="muted">
-          If your studio repo does not yet have a <code>report/</code> folder,
-          copy it from this handbook
-          (<a href="report/README.md">report/README.md</a>).
-          Put your CSV in <code>data/</code>. In the VS Code terminal:
+          If your studio repo does not yet have <code>week04-report/</code>,
+          copy the starter files from this handbook
+          (<a href="report/README.md">report/README.md</a>)
+          into that folder. Put your CSV in the same folder (or point the script at
+          <code>../week02-rt/</code> or <code>../week03-inventory/</code>).
+          In the VS Code terminal:
         </p>
-        <pre class="snippet">cd report
+        <pre class="snippet">cd week04-report
 python3 -m venv .venv
 source .venv/bin/activate
-bash build.sh ../data/YOURFILE.csv</pre>
+bash build.sh YOURFILE.csv</pre>
         <p class="muted" style="margin-top: 12px">
           Windows (PowerShell): <code>py -3 -m venv .venv</code>, then
           <code>.\.venv\Scripts\Activate.ps1</code>, then
-          <code>py -3 scripts/summarize.py --csv ../data/YOURFILE.csv --out output --report REPORT.md</code>.
-          If Git is installed, <code>bash build.sh ../data/YOURFILE.csv</code>
+          <code>py -3 scripts/summarize.py --csv YOURFILE.csv --out output --report REPORT.md</code>.
+          If Git is installed, <code>bash build.sh YOURFILE.csv</code>
           also works.
         </p>
         <p class="muted" style="margin-top: 12px">
@@ -229,11 +231,9 @@ bash build.sh ../data/YOURFILE.csv</pre>
           <div class="kicker">Weekly report</div>
           <h2>What to submit</h2>
           <p class="muted">
-            Paths to <code>report/REPORT.md</code> (or
-            <code>lab-notes/week04.md</code>),
-            <code>report/scripts/summarize.py</code>,
-            <code>report/output/numbers.md</code> or
-            <code>numbers.tex</code>, and <code>report/main.tex</code>.
+            Paths to <code>week04-report/README.md</code> (and <code>REPORT.md</code> if you kept a long paper),
+            <code>week04-report/scripts/summarize.py</code>,
+            the generated snippet, and <code>week04-report/main.tex</code>.
             Name one change you made after the first build. Due Tuesday
             29 September (no class on the 30th).
           </p>

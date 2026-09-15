@@ -1,26 +1,45 @@
 # PSYCH 302 / 305 studio
 
-Private workspace for University of Alberta PSYCH 302/305, Fall 2026.
-
-## Start here
-
-Work on your laptop in Visual Studio Code. GitHub Codespaces is not used this term.
-
-If you do not have this repository yet, use the public handbook tonight and submit Week 0 on Canvas.
-
-1. Install VS Code, Git, and Python 3: https://kylemath.github.io/Psych302-305-KyleMathewson/workflow.html#install
-2. Clone this repository in VS Code: **View → Command Palette → Git: Clone**. Sign in to GitHub when asked. If VS Code asks to Reopen in Container, choose **Don’t Reopen**.
-3. Copilot in VS Code is optional if GitHub Education is approved. **Do not buy Copilot.**
-4. Weekly lab notes live in `lab-notes/`. Copy `lab-notes/TEMPLATE.md` for a new week.
-5. Data files (CSV) go in `data/`. Do not commit classmate names.
-6. Week 2: personalize https://kylemath.github.io/Psych302-305-KyleMathewson/rt.html , paste the sketch into `rt/rt.html`, run `python3 -m http.server 8765` (Windows: `py -3 -m http.server 8765`), open http://127.0.0.1:8765/rt/rt.html , export the CSV into `data/`. https://kylemath.github.io/Psych302-305-KyleMathewson/workflow.html#submit
-7. Week 3 inventory: https://kylemath.github.io/Psych302-305-KyleMathewson/inventory.html , CSV in `data/`.
-8. Week 4 report loop: `report/` (Markdown, `scripts/summarize.py`, `main.tex`). Do not type a mean by hand.
-9. Week 6 annotation: `lab-notes/ANNOTATION.md`. File the paper under `papers/`.
-10. Week 7 methods: `lab-notes/METHODS.md`.
-11. Project: `project/CHECKIN.md` (28 October) and `project/FINAL.md` (2 December).
+Private workspace. The class handbook stays on the course site — do not copy those pages into this repository.
 
 **Handbook:** https://kylemath.github.io/Psych302-305-KyleMathewson/  
 **Canvas:** https://canvas.ualberta.ca/courses/35483
 
-Keep this repository private. Do not commit secrets or `.env` files.
+Work in Visual Studio Code on your laptop. GitHub Codespaces is not used. Do not buy Copilot.
+
+## Layout
+
+One folder per week. **The report is that folder’s `README.md`.** Put the CSV and any code you wrote in the same folder.
+
+| Folder | When |
+| --- | --- |
+| `week02-rt/` | Week 2 reaction-time page, CSV, report |
+| `week03-inventory/` | Week 3 inventory CSV and report (this week) |
+| `week04-report/` | Week 4 (later — do not make it yet) |
+| `week05-compare/` | Week 5 |
+| `week06-cite/` | Week 6 |
+| `week07-methods/` | Week 7 |
+| `week08-results/` | Week 8 |
+| `week09-game/` | Week 9 |
+| `week10-project/` | `CHECKIN.md` (28 October) and `FINAL.md` (2 December) are already in this folder |
+
+Week 1 stays in the public repo you already published. Do not put laboratory work in a fork of the class handbook.
+
+## Clone once
+
+https://kylemath.github.io/Psych302-305-KyleMathewson/workflow.html#install
+
+In VS Code: Command Palette → **Git: Clone** → `https://github.com/kylemath/psych302-305-YOURUSERNAME`. If it asks to Reopen in Container, choose **Don’t Reopen**.
+
+## Each week
+
+1. Open this week’s folder. Edit `README.md` there (prediction first) —
+   except `week10-project/`, where you edit `CHECKIN.md` then `FINAL.md`.
+2. Do the laboratory on the handbook page for that week.
+3. Drop any CSV into the same folder.
+4. Source Control → Commit → Sync.
+5. Paste the path (for example `week03-inventory/README.md`) on that week’s Canvas assignment.
+
+A push that is not pasted on Canvas is not submitted.
+
+Keep this repository private. Do not commit secrets, `.env` files, or classmate names.

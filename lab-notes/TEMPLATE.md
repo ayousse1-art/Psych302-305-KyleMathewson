@@ -1,28 +1,5 @@
-# Laboratory report · Week NN
+# Laboratory report (old template)
 
-**Name:**
-**Date of class:**
-**Tool / example:**
+From Week 3, the report is **`README.md` inside that week’s folder** (for example `week03-inventory/README.md`). Do not copy this file into a new `lab-notes/weekNN.md`.
 
-## Code or file you changed (if any)
-Week 2: how you personalized or modified `rt/rt.html`, and the path. Other weeks: leave blank if you only wrote the note.
-
-## Phenomenon
-What did we measure?
-
-## Prediction
-What did you write down before the first trial?
-
-## Number
-A mean, a standard deviation, *n*, or a short table. Paste nothing that identifies a classmate.
-
-## Limitation
-One reason this number can lie.
-
-## Copilot disclosure
-- **Used tonight:** yes / no
-- **What I asked** (one sentence):
-- **What I kept:**
-- **What I changed:**
-
-If Copilot was unavailable, write “no Copilot tonight” and stop. Do not purchase a plan.
+Layout and VS Code steps: [workflow.html](../workflow.html).

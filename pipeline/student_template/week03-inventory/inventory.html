@@ -3,97 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 3 · Inventory · PSYCH 302 / 305</title>
-    <link rel="stylesheet" href="studio.css" />
-    <style>
-      .item {
-        padding: 14px 0;
-        border-bottom: 1px solid var(--panel-border);
-      }
-      .item p { margin: 0 0 10px; color: var(--ink); }
-      .scale {
-        display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 6px;
-        font-family: "Segoe UI", sans-serif;
-        font-size: 0.78rem;
-        color: var(--muted);
-      }
-      .scale label {
-        display: grid;
-        gap: 6px;
-        justify-items: center;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--panel-border);
-        border-radius: 10px;
-        padding: 8px 4px;
-        cursor: pointer;
-      }
-      table { width: 100%; border-collapse: collapse; font-family: "Segoe UI", sans-serif; font-size: 0.88rem; }
-      th, td { text-align: left; padding: 6px 0; border-bottom: 1px solid var(--panel-border); }
-    </style>
+    <title>My inventory · Week 3</title>
+    <!-- This page needs inventory.css in the SAME folder to render correctly.
+         If you copy this file somewhere else, copy inventory.css with it. -->
+    <link rel="stylesheet" href="inventory.css" />
   </head>
   <body>
     <div class="wrap">
-      <nav class="topnav">
-        <a class="brand" href="index.html">
-          <small>Week 3 · PSYCH 302 / 305</small>
-          <strong>Inventory</strong>
-        </a>
-        <div class="nav-links">
-          <a href="index.html">Overview</a>
-          <a href="schedule.html">Schedule</a>
-          <a href="workflow.html">Computing</a>
-          <a href="playground.html">Week 1</a>
-          <a href="labs.html">Labs</a>
-        </div>
-      </nav>
-
-      <header class="panel" style="margin-bottom: 18px">
-        <div class="kicker">Week 3 laboratory</div>
-        <h1>A form, a score, a table — then your own</h1>
+      <header class="panel">
+        <h1>My inventory</h1>
         <p class="lede">
-          This page is the class demo: ten statements, two in each of five
-          familiar domains, run once together. The graded work is different —
-          <strong>your own copy</strong> of this instrument already sits in
-          your private repo at <code>week03-inventory/inventory.html</code>
-          (with its stylesheet, <code>inventory.css</code>, right beside it).
-          Open your copy in VS Code, rewrite all ten items so they are your
-          own questions, keep the shape (5 domains, 2 items, one reverse per
-          pair) so the scoring still works, then run and export your CSV.
-          Running only the class demo below is not the assignment.
-          <a href="workflow.html#arrange">How you work</a>.
+          Demo copy for class. Edit every item’s <code>text</code> below in
+          the <code>&lt;script&gt;</code> so these are your own questions, not
+          the class default. Keep the same shape (5 domains, 2 items each,
+          one reverse-scored per domain) so scoring still works. Then Score,
+          Export CSV into this folder, and write <code>README.md</code>.
         </p>
       </header>
 
-      <div class="grid-2">
-        <section class="panel">
-          <div class="kicker">Class demo · 1 = strongly disagree · 5 = strongly agree</div>
-          <h2>Items</h2>
-          <form id="invForm"></form>
-          <div class="actions" style="margin-top: 16px">
-            <button type="button" id="scoreBtn" class="primary">Score</button>
-            <button type="button" id="exportBtn" class="secondary">Export CSV</button>
-          </div>
-          <p class="muted" style="margin-top: 12px" id="status">Answer every item, then score.</p>
-        </section>
-        <aside class="panel">
-          <div class="kicker">Scored 1–5 after reverse items</div>
-          <h2>Subscale means</h2>
-          <p class="muted">
-            Even-numbered items are reverse-scored (6 minus the response).
-            A subscale mean uses two items.
-          </p>
-          <div class="stat" id="meanEl">—</div>
-          <p class="muted" id="summaryEl">Overall mean after reverse scoring.</p>
-          <table>
-            <thead><tr><th>Domain</th><th>Mean</th></tr></thead>
-            <tbody id="scoreBody"><tr><td colspan="2">Not scored yet.</td></tr></tbody>
-          </table>
-        </aside>
+      <div class="panel">
+        <div class="muted" style="margin-bottom: 8px">1 = strongly disagree · 5 = strongly agree</div>
+        <form id="invForm"></form>
+        <div class="actions" style="margin-top: 16px">
+          <button type="button" id="scoreBtn" class="primary">Score</button>
+          <button type="button" id="exportBtn" class="secondary">Export CSV</button>
+        </div>
+        <p class="muted" style="margin-top: 12px" id="status">Answer every item, then score.</p>
+      </div>
+
+      <div class="panel">
+        <div class="muted" style="margin-bottom: 8px">Scored 1–5 after reverse items</div>
+        <div class="stat" id="meanEl">—</div>
+        <p class="muted" id="summaryEl">Overall mean after reverse scoring.</p>
+        <table>
+          <thead><tr><th>Domain</th><th>Mean</th></tr></thead>
+          <tbody id="scoreBody"><tr><td colspan="2">Not scored yet.</td></tr></tbody>
+        </table>
       </div>
     </div>
+
     <script>
+      // === EDIT EACH ITEM BELOW ===
+      // Rewrite every "text" so these are your own ten statements, not the
+      // class default. You may rename the five "domain" values too (they
+      // are just labels — pick five things you actually want to measure).
+      // Keep: 5 domains, 2 items per domain, exactly one reverse (1) per
+      // pair. That is what score() and exportCsv() below assume.
       const ITEMS = [
         { n: 1, domain: "extraversion", reverse: 0, text: "I enjoy starting conversations with people I do not know well." },
         { n: 2, domain: "extraversion", reverse: 1, text: "I prefer to keep to myself in a group." },
@@ -106,7 +61,9 @@
         { n: 9, domain: "openness", reverse: 0, text: "I like trying unfamiliar ideas or activities." },
         { n: 10, domain: "openness", reverse: 1, text: "I prefer routines I already know." },
       ];
-      const DOMAINS = ["extraversion", "agreeableness", "conscientiousness", "stability", "openness"];
+      // === STOP EDITING HERE — the rest just renders and scores ITEMS ===
+
+      const DOMAINS = [...new Set(ITEMS.map((i) => i.domain))];
       const form = document.getElementById("invForm");
       let lastRows = [];
 
@@ -140,12 +97,12 @@
         lastRows = rows;
         const overall = mean(rows.map((r) => r.scored));
         document.getElementById("meanEl").textContent = overall.toFixed(2);
-        document.getElementById("summaryEl").textContent = "n = 10 items · teaching instrument only";
+        document.getElementById("summaryEl").textContent = "n = " + ITEMS.length + " items · teaching instrument only";
         document.getElementById("scoreBody").innerHTML = DOMAINS.map((domain) => {
           const cell = rows.filter((r) => r.domain === domain);
           return `<tr><td>${domain}</td><td>${mean(cell.map((r) => r.scored)).toFixed(2)}</td></tr>`;
         }).join("");
-        document.getElementById("status").textContent = "Scored (demo only). Edit YOUR copy in week03-inventory/inventory.html for the graded task.";
+        document.getElementById("status").textContent = "Scored. Export the CSV into this folder.";
         return rows;
       }
 
