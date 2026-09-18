@@ -18,7 +18,13 @@ TEMPLATES = ROOT / "templates"
 STUDENT_TEMPLATE = ROOT / "student_template"
 OUT = ROOT / "out"
 IDS_PATH = OUT / "ids.json"
-PSYCH275_PIPELINE = Path("/Users/kylemathewson/Teaching/Psych275_Instructor/pipeline")
+PSYCH275_CANDIDATES = (
+    Path("/Users/fulkanjou/Psych275_Instructor/pipeline"),
+    Path("/Users/kylemathewson/Teaching/Psych275_Instructor/pipeline"),
+    Path.home() / "Psych275_Instructor" / "pipeline",
+    Path.home() / "Teaching" / "Psych275_Instructor" / "pipeline",
+)
+PSYCH275_PIPELINE = next((p for p in PSYCH275_CANDIDATES if p.is_dir()), PSYCH275_CANDIDATES[0])
 GITHUB_OWNER = "kylemath"
 GITHUB_USER_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9]|-(?=[A-Za-z0-9])){0,38}$")
 FORBIDDEN_TEMPLATE_NAMES = {".env", "pipeline"}
@@ -38,8 +44,8 @@ def _load_env() -> None:
     from dotenv import load_dotenv
 
     load_dotenv(PSYCH275_PIPELINE / ".env")
+    os.environ["CANVAS_COURSE_ID"] = "35483"
     load_dotenv(ROOT / ".env", override=True)
-    os.environ.setdefault("CANVAS_COURSE_ID", "35483")
 
 
 def _client():
@@ -71,6 +77,27 @@ def _save_ids(update: dict) -> dict:
     data.update(update)
     IDS_PATH.write_text(json.dumps(data, indent=2) + "\n")
     return data
+
+
+def _weekly_assignment_id(client, week: int) -> int:
+    """Resolve a weekly assignment id from ids.json, or look it up by name and cache it."""
+    from course_modules import WEEKLIES
+
+    ids = json.loads(IDS_PATH.read_text()) if IDS_PATH.exists() else {}
+    weekly = ids.get("weekly_assignments") or {}
+    key = f"week{week:02d}"
+    aid = (weekly.get(key) or {}).get("id")
+    if aid:
+        return int(aid)
+    row = next((r for r in WEEKLIES if r["n"] == week), None)
+    if not row:
+        raise SystemExit(f"No weekly definition for week {week}.")
+    found = client.find_assignment_by_name(row["name"])
+    if not found:
+        raise SystemExit(f"No Canvas assignment named {row['name']!r}. Run modules-create first.")
+    weekly[key] = {"id": found["id"], "url": found.get("html_url")}
+    _save_ids({"weekly_assignments": weekly, "course_id": int(client.require_course())})
+    return int(found["id"])
 
 
 def cmd_courses(_: argparse.Namespace) -> None:
@@ -156,12 +183,21 @@ def parse_week0_body(body: str) -> dict:
     }
 
 
-def cmd_week0_pull(_: argparse.Namespace) -> None:
-    client = _client()
+def _week0_assignment_id(client) -> int:
     ids = json.loads(IDS_PATH.read_text()) if IDS_PATH.exists() else {}
     aid = os.environ.get("CANVAS_WEEK0_ASSIGNMENT_ID") or ids.get("week0_assignment_id")
-    if not aid:
+    if aid:
+        return int(aid)
+    found = client.find_assignment_by_name("Week 0 · GitHub username")
+    if not found:
         raise SystemExit("No Week 0 assignment id. Run week0-create first.")
+    _save_ids({"week0_assignment_id": found["id"], "course_id": int(client.require_course())})
+    return int(found["id"])
+
+
+def cmd_week0_pull(_: argparse.Namespace) -> None:
+    client = _client()
+    aid = _week0_assignment_id(client)
     rows = []
     for sub in client.list_submissions(aid):
         user = sub.get("user") or {}
@@ -231,11 +267,7 @@ def parse_week1_body(body: str) -> dict:
 def cmd_week1_pull(_: argparse.Namespace) -> None:
     """Harvest Week 1 Canvas boxes. Writes out/week1_roster.json. Does not grade."""
     client = _client()
-    ids = json.loads(IDS_PATH.read_text()) if IDS_PATH.exists() else {}
-    weekly = ids.get("weekly_assignments") or {}
-    aid = (weekly.get("week01") or {}).get("id")
-    if not aid:
-        raise SystemExit("No Week 1 assignment id in out/ids.json. Run modules-create first.")
+    aid = _weekly_assignment_id(client, 1)
     rows = []
     for sub in client.list_submissions(aid):
         user = sub.get("user") or {}
@@ -268,11 +300,8 @@ def cmd_week0_grade(args: argparse.Namespace) -> None:
     if not roster_path.exists():
         raise SystemExit("No week0_roster.json. Run week0-pull first.")
     rows = json.loads(roster_path.read_text())
-    ids = json.loads(IDS_PATH.read_text()) if IDS_PATH.exists() else {}
-    aid = os.environ.get("CANVAS_WEEK0_ASSIGNMENT_ID") or ids.get("week0_assignment_id")
-    if not aid:
-        raise SystemExit("No Week 0 assignment id. Run week0-create first.")
     client = _client()
+    aid = _week0_assignment_id(client)
     cid = client.require_course()
     n_complete = 0
     n_incomplete = 0
@@ -758,9 +787,27 @@ def main() -> None:
     c.set_defaults(func=cmd_week0_create)
     sub.add_parser("week0-pull").set_defaults(func=cmd_week0_pull)
     sub.add_parser("week1-pull").set_defaults(func=cmd_week1_pull)
+    from weekly_ops import cmd_roster_pull, cmd_week1_grade, cmd_week2_grade, cmd_week2_pull, cmd_repos_cleanup
+
+    sub.add_parser("roster-pull").set_defaults(func=cmd_roster_pull)
+    sub.add_parser("week2-pull").set_defaults(func=cmd_week2_pull)
     g = sub.add_parser("week0-grade")
     g.add_argument("--dry-run", action="store_true", help="Print complete/incomplete; do not PUT")
     g.set_defaults(func=cmd_week0_grade)
+    w1g = sub.add_parser("week1-grade")
+    w1g.add_argument("--dry-run", action="store_true", help="Print scores only (default if --apply is omitted)")
+    w1g.add_argument("--apply", action="store_true", help="PUT rubric scores on Canvas")
+    w1g.add_argument("--force", action="store_true", help="Overwrite a score that is already posted")
+    w1g.set_defaults(func=cmd_week1_grade)
+    w2g = sub.add_parser("week2-grade")
+    w2g.add_argument("--dry-run", action="store_true", help="Print scores only (default if --apply is omitted)")
+    w2g.add_argument("--apply", action="store_true", help="PUT rubric scores on Canvas")
+    w2g.add_argument("--force", action="store_true", help="Overwrite a score that is already posted")
+    w2g.set_defaults(func=cmd_week2_grade)
+    cl = sub.add_parser("repos-cleanup")
+    cl.add_argument("--dry-run", action="store_true", help="Print the plan only (default if --apply is omitted)")
+    cl.add_argument("--apply", action="store_true", help="Archive private repos whose week0 owner dropped")
+    cl.set_defaults(func=cmd_repos_cleanup)
     m = sub.add_parser("repos-mint")
     m.add_argument("--dry-run", action="store_true", help="Print the plan only (default if --apply is omitted)")
     m.add_argument("--apply", action="store_true", help="Create private repos and add collaborators")
