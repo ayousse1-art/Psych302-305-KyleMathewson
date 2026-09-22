@@ -103,7 +103,7 @@ A small study on a page you already know how to build, using a tool taught in th
 4. One limitation, including what your *n* can and cannot support.
 5. A CSV in that week’s folder if you collected any, or the line `no new data`.
 6. An AI disclosure, or `no Copilot tonight`.
-7. A short in-class **presentation** of that page on the last class meeting (2 December). The presentation is one component of the 35% project score, not a separate exam and not a sit-down test.
+7. A 3-minute in-class **presentation** of that page on the last class meeting (2 December). The presentation is one component of the 35% project score, not a separate exam and not a sit-down test.
 
 Marking (35 points): running page 7, prediction 6, result 7, limitation 5, presentation 5, data 3, disclosure 2. Full scheme: [https://kylemath.github.io/Psych302-305-KyleMathewson/rubrics.html](https://kylemath.github.io/Psych302-305-KyleMathewson/rubrics.html)
 
@@ -172,7 +172,7 @@ Full agendas: [https://kylemath.github.io/Psych302-305-KyleMathewson/schedule.ht
 - **Attendance is not graded.** Missing a Wednesday does not remove the Tuesday report.
 - **Weekly reports:** due Tuesday 17:00. The lowest of nine is dropped. That dropped week is the late/absent buffer. Further late weeklies are not accepted unless Accessibility Resources or an approved absence/deferral is already in place.
 - **Week 0:** still accepted for complete/incomplete after the first night, so a student who missed 2 September can catch up before Week 2. It does not enter the average.
-- **Midterm check-in:** due in class 28 October. If you are absent with a reason the instructor accepts, submit by Friday 31 October, 17:00.
+- **Midterm check-in:** due in class 28 October. If you are absent with a reason the instructor accepts, submit by Friday 30 October, 17:00.
 - **Final project:** Wednesday 2 December, 21:00 — running page on Canvas and the short in-class presentation. There is no registrar-scheduled final examination. If you miss the presentation with a reason the instructor accepts, present by Friday 4 December, 17:00. A missed project (no page and no presentation) follows the Faculty process for a missed final assessment.
 - Do not submit classmate names or raw classmate data. Self as participant is the default.
 

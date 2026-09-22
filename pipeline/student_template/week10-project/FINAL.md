@@ -1,7 +1,7 @@
 # Final project · due Wednesday 2 December 2026
 
 **Weight:** 35% of the course. Individual. Self as participant by default.
-Rubric: https://kylemath.github.io/Psych302-305-KyleMathewson/rubrics.html
+Instructions and marks: https://kylemath.github.io/Psych302-305-KyleMathewson/project.html#final
 
 This file is the checklist — there is no separate template to copy. Build
 around the page and prediction you started in `CHECKIN.md` (same folder).
@@ -39,7 +39,7 @@ If Copilot was unavailable, write "no Copilot tonight" and stop. Do not
 purchase a plan.
 
 ## Last class meeting · 2 December
-A short presentation of this page. Everyone presents; that talk is 5 of the
+A 3-minute presentation of this page. Everyone presents; that talk is 5 of the
 35 points.
 
 ## Allowed tools

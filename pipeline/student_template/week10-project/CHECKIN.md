@@ -1,7 +1,7 @@
 # Midterm check-in · due Wednesday 28 October 2026, in class
 
 **Weight:** 15% of the course. Individual. Graded by the instructor.
-Rubric: https://kylemath.github.io/Psych302-305-KyleMathewson/rubrics.html
+Instructions and marks: https://kylemath.github.io/Psych302-305-KyleMathewson/project.html#midterm
 
 This file is the check-in — there is no separate template to copy.
 `FINAL.md` (later, same folder) is the last piece of the project.
