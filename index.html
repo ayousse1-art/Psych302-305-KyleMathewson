@@ -56,7 +56,7 @@
             <li><span>Meeting</span>Wednesday 18:00–21:00</li>
             <li><span>Prerequisites</span>PSYCH 104, 105, and one 200-level course</li>
             <li><span>Software</span>VS Code, Git, and Python 3 on your laptop</li>
-            <li><span>This week</span><a href="inventory.html">Week 3 · VS Code and inventory</a></li>
+            <li><span>Next class</span><a id="nextClassLink" href="schedule.html">See the schedule</a></li>
           </ul>
         </aside>
       </header>
@@ -186,11 +186,11 @@
           <div class="kicker">No class 30 Sep and 11 Nov</div>
           <h2>Documentation and project</h2>
           <div class="week"><b>21 Oct</b><div>Write a Methods section. <a href="methods.html">Week 7</a></div></div>
-          <div class="week"><b>28 Oct</b><div>Results page and midterm check-in. <a href="results.html">Week 8</a></div></div>
+          <div class="week"><b>28 Oct</b><div>Results page and midterm project plan. <a href="results.html">Week 8</a></div></div>
           <div class="week"><b>4 Nov</b><div>A browser game that studies a question. <a href="game.html">Week 9</a></div></div>
           <div class="week"><b>18 Nov</b><div>Individual project workshop. <a href="project.html">Weeks 10–12</a></div></div>
           <div class="week"><b>25 Nov</b><div>Project laboratory.</div></div>
-          <div class="week"><b>2 Dec</b><div>Final presentations (last meeting). Page due the same night.</div></div>
+          <div class="week"><b>2 Dec</b><div>Final presentations, 3 minutes each (last meeting). Page due the same night.</div></div>
           <p class="muted" style="margin-top: 16px"><a href="schedule.html">Full schedule</a> with agendas.</p>
         </article>
       </section>
@@ -201,26 +201,23 @@
           <h2>Weights</h2>
           <p class="muted">
             <strong>50%</strong> weekly laboratory reports (weeks 1–9; drop the lowest).<br />
-            <strong>15%</strong> individual midterm check-in (28 October).<br />
-            <strong>35%</strong> individual final project (page + in-class presentation, 2 December). There is no registrar exam.<br />
-            Point-by-point marking is on
-            <a href="rubrics.html">rubrics.html</a>.
+            <strong>15%</strong> midterm project plan (28 October).<br />
+            <strong>35%</strong> final project and 3-minute in-class talk (2 December). Not a written exam.<br />
+            Weekly marking: <a href="rubrics.html">rubrics.html</a>.
+            Midterm and final: <a href="project.html">project.html</a>.
             Official late work and letter grades: Simple Syllabus on Canvas.
           </p>
         </article>
         <article class="panel">
-          <div class="kicker">Right now · 16 September</div>
-          <h2>Week 3 · VS Code and inventory</h2>
+          <div class="kicker" id="nowKicker">Right now</div>
+          <h2 id="nowTitle">This week</h2>
+          <p class="muted" id="nowBody">
+            The <a href="schedule.html">schedule</a> lists every class night
+            and its laboratory page. Weekly reports are due the Tuesday after
+            class, 17:00, on <a href="https://canvas.ualberta.ca/courses/35483">Canvas</a>.
+          </p>
+          <p class="muted" id="nowDue"></p>
           <p class="muted">
-            First in-class VS Code night. Clone
-            <code>kylemath/psych302-305-YOURUSERNAME</code>,
-            move Week 2 into <code>week02-rt/</code>, then rewrite all ten
-            items of your own copy of the
-            <a href="inventory.html">inventory</a>
-            and write <code>week03-inventory/README.md</code>.
-            <a href="https://canvas.ualberta.ca/courses/35483/assignments/812445">Week 3 report</a>
-            is due Tuesday 22 September, 17:00.
-            <a href="workflow.html#arrange">Walkthrough</a>.
             Scroll down for the two Week 1 homepages we kept on this site
             (<a href="#isaac">Isaac</a>,
             <a href="#joshua">Joshua</a>).
@@ -246,5 +243,69 @@
       <p class="home-stack-label">Week 1 homepage · Joshua Tokarsky</p>
       <iframe src="homes/joshua.html" title="Joshua Tokarsky, Week 1 homepage"></iframe>
     </section>
+    <script>
+      (function () {
+        const CANVAS = "https://canvas.ualberta.ca/courses/35483/assignments/";
+        // Class nights. `due` is the weekly report deadline (Tuesday 17:00 local).
+        const MEETINGS = [
+          { date: "2026-09-02", label: "2 Sep", title: "Week 1 · GitHub and playground", page: "playground.html", report: 1, due: "2026-09-08" },
+          { date: "2026-09-09", label: "9 Sep", title: "Week 2 · p5.js and reaction time", page: "rt.html", report: 2, due: "2026-09-15" },
+          { date: "2026-09-16", label: "16 Sep", title: "Week 3 · VS Code and inventory", page: "inventory.html", report: 3, due: "2026-09-22" },
+          { date: "2026-09-23", label: "23 Sep", title: "Week 4 · Research reports", page: "report.html", report: 4, due: "2026-09-29" },
+          { date: "2026-10-07", label: "7 Oct", title: "Week 5 · Two-condition comparison", page: "compare.html", report: 5, due: "2026-10-13" },
+          { date: "2026-10-14", label: "14 Oct", title: "Week 6 · Cite and file a paper", page: "cite.html", report: 6, due: "2026-10-20" },
+          { date: "2026-10-21", label: "21 Oct", title: "Week 7 · Methods section", page: "methods.html", report: 7, due: "2026-10-27" },
+          { date: "2026-10-28", label: "28 Oct", title: "Week 8 · Results page and midterm plan", page: "results.html", report: 8, due: "2026-11-03" },
+          { date: "2026-11-04", label: "4 Nov", title: "Week 9 · Gamified research", page: "game.html", report: 9, due: "2026-11-10" },
+          { date: "2026-11-18", label: "18 Nov", title: "Week 10 · Project workshop", page: "project.html" },
+          { date: "2026-11-25", label: "25 Nov", title: "Week 11 · Project laboratory", page: "project.html" },
+          { date: "2026-12-02", label: "2 Dec", title: "Week 12 · Final presentations", page: "project.html" },
+        ];
+        const at = (iso, hh, mm) => {
+          const [y, m, d] = iso.split("-").map(Number);
+          return new Date(y, m - 1, d, hh, mm);
+        };
+        const nice = (iso) =>
+          at(iso, 12, 0).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
+        const now = new Date();
+
+        const next = MEETINGS.find((m) => at(m.date, 21, 0) >= now);
+        const due = MEETINGS.find((m) => m.due && at(m.due, 17, 0) >= now && at(m.date, 18, 0) <= now);
+
+        const link = document.getElementById("nextClassLink");
+        if (next) {
+          link.textContent = next.title + " (" + next.label + ")";
+          link.href = next.page;
+          document.getElementById("nowKicker").textContent = "Next class · " + nice(next.date);
+          document.getElementById("nowTitle").textContent = next.title;
+          document.getElementById("nowBody").innerHTML =
+            'Laboratory page: <a href="' + next.page + '">' + next.page + "</a>. " +
+            'Agenda: <a href="schedule.html">schedule</a>.';
+          for (const row of document.querySelectorAll(".week")) {
+            const b = row.querySelector("b");
+            if (b && b.textContent.trim() === next.label) {
+              row.style.outline = "1px solid var(--gold, #e8b86d)";
+              row.style.borderRadius = "10px";
+            }
+          }
+        } else {
+          link.textContent = "Term finished";
+          document.getElementById("nowKicker").textContent = "Term finished";
+          document.getElementById("nowTitle").textContent = "Thanks for a good term";
+        }
+        const lines = [];
+        if (due) {
+          lines.push('<a href="' + CANVAS + (812442 + due.report) + '">Week ' + due.report +
+            " report</a> is due " + nice(due.due) + ", 17:00.");
+        }
+        if (next && next.date === "2026-10-28") {
+          lines.push('<a href="project.html#midterm">Midterm project plan</a> is due in class, 21:00.');
+        }
+        if (next && next.date >= "2026-11-18") {
+          lines.push('<a href="project.html#final">Final project</a> and 3-minute talk: Wednesday 2 December.');
+        }
+        document.getElementById("nowDue").innerHTML = lines.join("<br />");
+      })();
+    </script>
   </body>
 </html>
