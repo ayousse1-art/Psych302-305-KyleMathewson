@@ -23,22 +23,16 @@ loads `inventory.css` from this same folder, not from the class site.
 6. Finish this file.
 
 ## Prediction
-Which of your domains, and a range you expect, written before you click Score.
-
+I predicted that conscientiousness would be one of my higher domains, with a mean between 3 and 4.
 ## Number
-Domain name, mean (after reverse scoring), item count (2). Path to the CSV in this folder.
-
+Conscientiousness, mean = 3.00 after reverse scoring, item count = 2. The CSV is `inventory-week03.csv`.
 ## What I measured and why
-One or two sentences: what did you choose to ask about, and why these ten statements?
-
+I chose to measure extraversion, agreeableness, conscientiousness, stability, and openness because these domains reflect different aspects of personality and everyday behaviour. I wanted the statements to focus on situations and behaviours that are relevant to my own experiences.
 ## Tedium note
-One sentence: what was it like hand-editing ten hardcoded strings inside a
-`<script>` tag? What would you rather the items lived in instead (a
-separate file, a form builder, something else)?
+Hand-editing ten hardcoded statements was repetitive and could become time-consuming with more items; I would rather store the items in a separate file or structured dataset and have the program generate them automatically.
 
 ## Limitation
-One reason a self-report number can lie.
-
+One limitation of self-report is that people may give answers they think are socially desirable rather than answers that accurately reflect their typical behaviour.
 ## Copilot disclosure
 - **Used tonight:** yes / no
 - **What I asked** (one sentence):
@@ -46,3 +40,4 @@ One reason a self-report number can lie.
 - **What I changed:**
 
 If Copilot was unavailable, write “no Copilot tonight” and stop. Do not purchase a plan.
+no Copilot tonight
