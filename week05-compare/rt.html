@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 2 · Reaction time sandbox · PSYCH 302 / 305</title>
+    <link rel="stylesheet" href="studio.css" />
+    <style>
+      .code-wrap {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        height: 420px;
+        border-radius: 12px;
+        border: 1px solid var(--panel-border);
+        background: #0e1318;
+        overflow: hidden;
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, "Courier New", monospace;
+        font-size: 13px;
+        line-height: 1.55;
+        tab-size: 2;
+      }
+      .code-gutter {
+        margin: 0;
+        padding: 12px 8px 12px 0;
+        height: 100%;
+        overflow: hidden;
+        color: #6e7681;
+        text-align: right;
+        user-select: none;
+        background: #0b1014;
+        border-right: 1px solid rgba(232, 228, 219, 0.08);
+        white-space: pre;
+      }
+      .code-pane {
+        position: relative;
+        min-width: 0;
+        height: 100%;
+      }
+      .code-hl,
+      #codeInput {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        padding: 12px 14px;
+        border: 0;
+        white-space: pre;
+        overflow: auto;
+        font: inherit;
+        line-height: inherit;
+        tab-size: inherit;
+      }
+      .code-hl {
+        pointer-events: none;
+        overflow: hidden;
+        color: #d4d4d4;
+      }
+      #codeInput {
+        z-index: 1;
+        background: transparent;
+        color: transparent;
+        caret-color: #f3efe6;
+        resize: none;
+        outline: none;
+        scrollbar-color: #3d444d #0e1318;
+      }
+      #codeInput::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      #codeInput::-webkit-scrollbar-thumb {
+        background: #3d444d;
+        border-radius: 8px;
+      }
+      .tok-cmt { color: #6a9955; }
+      .tok-str { color: #ce9178; }
+      .tok-kw { color: #c586c0; }
+      .tok-num { color: #b5cea8; }
+      .tok-fn { color: #dcdcaa; }
+      iframe {
+        display: block;
+        width: 100%;
+        min-height: 460px;
+        border: 0;
+        background: #07090d;
+        border-radius: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="topnav">
+        <a class="brand" href="index.html">
+          <small>Week 2 · PSYCH 302 / 305</small>
+          <strong>Reaction time</strong>
+        </a>
+        <div class="nav-links">
+          <a href="index.html">Overview</a>
+          <a href="schedule.html">Schedule</a>
+          <a href="workflow.html">Computing</a>
+          <a href="p5.html">Week 2</a>
+          <a href="labs.html">Labs</a>
+        </div>
+      </nav>
+
+      <header class="panel" style="margin-bottom: 18px">
+        <div class="kicker">Week 2 laboratory · after the p5 studio</div>
+        <h1>Remix a timed response, then keep the code</h1>
+        <p class="lede">
+          This page is a sandbox, like
+          <a href="p5.html">p5.html</a>
+          with a full block. <strong>Personalize the task</strong> so a
+          stranger can tell it is yours — how it looks, the timing, the
+          labels, or the procedure. A one-number tweak of the class default
+          is not enough. Click <strong>Run</strong>, then Start in the
+          preview. Space or click when the mark appears. When you like it,
+          <strong>Copy sketch</strong> and paste it into
+          <code>rt/rt.html</code> in VS Code. Write a predicted mean
+          first. Same assignment for everyone.
+          Walkthrough:
+          <a href="workflow.html#submit">workflow.html § How you work this week</a>.
+        </p>
+      </header>
+
+      <div class="grid-2" style="margin-bottom: 16px">
+        <section class="panel">
+          <div class="kicker">Your sketch</div>
+          <h2>Edit, run, copy</h2>
+          <p class="muted">
+            Modify the sketch until the task is yours. Use the knobs
+            (<code>markSize</code>, <code>markColor</code>, delays) and
+            change the drawing or the wording. Run after each edit. The mark
+            must leave after a response, and the next trial must start on its
+            own.
+          </p>
+          <div class="actions" style="margin: 12px 0">
+            <button type="button" id="runBtn" class="primary">Run</button>
+            <button type="button" id="copyBtn" class="secondary">Copy sketch</button>
+            <button type="button" id="resetBtn" class="secondary">Reset default</button>
+          </div>
+          <p class="muted" id="copyNote">Edits are saved in this browser until you reset.</p>
+          <div class="code-wrap" id="codeWrap">
+            <pre class="code-gutter" id="codeGutter" aria-hidden="true"></pre>
+            <div class="code-pane">
+              <pre class="code-hl" id="codeHl" aria-hidden="true"></pre>
+              <textarea id="codeInput" spellcheck="false" aria-label="p5.js reaction-time sketch"></textarea>
+            </div>
+          </div>
+        </section>
+        <aside class="panel">
+          <div class="kicker">Live task</div>
+          <h2>Click the preview, then Start</h2>
+          <iframe id="preview" title="Reaction-time preview"></iframe>
+        </aside>
+      </div>
+    </div>
+
+    <script type="text/plain" id="defaultSketch">
+// Simple reaction time. Personalize this sketch, then Run.
+let nTrials = 20;
+let markSize = 72;
+let markColor = [232, 184, 109];
+let delayMin = 800;
+let delayMax = 2200;
+let rtMin = 150;
+let rtMax = 2500;
+let condition = "A";
+let state = "idle";
+let trial = 0;
+let nWanted = 20;
+let onset = 0;
+let waitUntil = 0;
+let itiUntil = 0;
+
+let note = "Click Start. Then space or click when the square appears.";
+
+function fitWidth() {
+  return Math.max(320, Math.min(640, windowWidth));
+}
+
+function setup() {
+  createCanvas(fitWidth(), 420);
+  textFont("system-ui, sans-serif");
+}
+
+function windowResized() {
+  resizeCanvas(fitWidth(), 420);
+}
+
+function draw() {
+  background(7, 9, 13);
+
+  if (state === "wait" && millis() >= waitUntil) {
+    state = "show";
+    onset = millis();
+  }
+  if (state === "iti" && millis() >= itiUntil) {
+    beginTrial();
+  }
+
+  if (state === "wait") {
+    fill(183, 177, 164);
+    textAlign(CENTER, CENTER);
+    textSize(48);
+    text("+", width / 2, height / 2 + 10);
+  } else if (state === "show") {
+  noStroke();
+  fill(markColor[0], markColor[1], markColor[2]);
+  rectMode(CENTER);
+  const currentSize = condition === "A" ? markSize : 20;
+$  rectMode(CORNER);
+}
+
+  textAlign(LEFT, TOP);
+  textSize(14);
+  fill(183, 177, 164);
+  text(note, 16, 16);
+  text(progressLabel(), 16, 36);
+  text(statsLabel(), 16, 56);
+  drawButtons();
+}
+
+function progressLabel() {
+  if (state === "idle") return "Ready";
+  if (state === "done") return nWanted + " / " + nWanted;
+  return trial + " / " + nWanted;
+}
+
+function statsLabel() {
+  const good = results.filter((row) => row.usable && !row.practice);
+  if (!good.length) return "n = 0   mean = —   SD = —";
+  const xs = good.map((row) => row.rt);
+  const m = xs.reduce((a, b) => a + b, 0) / xs.length;
+  let sd = "—";
+  if (xs.length > 1) {
+    const v = xs.reduce((a, x) => a + (x - m) * (x - m), 0) / (xs.length - 1);
+    sd = String(Math.round(Math.sqrt(v)));
+  }
+  return "n = " + good.length + "   mean = " + Math.round(m) + " ms   SD = " + sd + " ms";
+}
+
+function btnW() {
+  return Math.min(130, (width - 48) / 3);
+}
+
+function drawButtons() {
+  const bw = btnW();
+  pill(16, height - 52, bw, 36, "Start " + nTrials);
+  pill(16 + bw + 10, height - 52, bw, 36, "Practice 6");
+  pill(16 + 2 * (bw + 10), height - 52, bw, 36, "Export CSV");
+}
+
+function pill(x, y, w, h, label) {
+  const over = mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
+  fill(over ? 232 : 40, over ? 184 : 44, over ? 109 : 52);
+  rect(x, y, w, h, 8);
+  fill(over ? 28 : 243, over ? 20 : 239, over ? 8 : 230);
+  textAlign(CENTER, CENTER);
+  textSize(14);
+  text(label, x + w / 2, y + h / 2);
+  textAlign(LEFT, TOP);
+}
+
+function hitButtons() {
+  const bw = btnW();
+  if (mouseY < height - 52 || mouseY > height - 16) return null;
+  if (mouseX >= 16 && mouseX <= 16 + bw) return "start";
+  if (mouseX >= 16 + bw + 10 && mouseX <= 16 + 2 * bw + 10) return "practice";
+  if (mouseX >= 16 + 2 * (bw + 10) && mouseX <= 16 + 3 * bw + 20) return "export";
+  return null;
+}
+
+function mousePressed() {
+  const hit = hitButtons();
+  if (hit === "start") {
+    startBlock(nTrials);
+    return;
+  }
+  if (hit === "practice") {
+    startBlock(6);
+    return;
+  }
+  if (hit === "export") {
+    exportCsv();
+    return;
+  }
+  handleResponse();
+}
+
+
+function keyPressed() {
+  if (key === "a" || key === "b") {
+    condition = key.toUpperCase();
+    note = "Condition " + condition + ". Click Start.";
+    return false;
+  }
+
+  if (key === " ") {
+    handleResponse();
+    return false;
+  }
+}
+
+
+function startBlock(n) {
+  nWanted = n;
+ 
+  trial = 0;
+  note = "Wait for the square.";
+  beginTrial();
+}
+
+function beginTrial() {
+  trial += 1;
+  if (trial > nWanted) {
+    state = "done";
+    note = "Block finished. Export the CSV.";
+    return;
+  }
+  state = "wait";
+  note = "Wait for the square.";
+  waitUntil = millis() + random(delayMin, delayMax);
+}
+
+function handleResponse() {
+  if (state === "wait") {
+    results.push({
+      trial: trial,
+      condition: condition,
+      rt: 0,
+      usable: 0,
+      anticipation: 1,
+      practice: nWanted <= 6 ? 1 : 0,
+    });
+    note = "Too early. Stored as an anticipation.";
+    state = "iti";
+    itiUntil = millis() + 550;
+    return;
+  }
+  if (state !== "show") return;
+  const rt = Math.round(millis() - onset);
+  const usable = rt >= rtMin && rt <= rtMax ? 1 : 0;
+  results.push({
+    trial: trial,
+    condition: condition,
+    usable: usable,
+    anticipation: 0,
+    practice: nWanted <= 6 ? 1 : 0,
+  });
+  if (rt < rtMin) note = rt + " ms — very fast; excluded from the mean.";
+  else if (rt > rtMax) note = rt + " ms — very slow; excluded from the mean.";
+  else note = rt + " ms";
+  state = "iti";
+  itiUntil = millis() + 550;
+}
+
+function exportCsv() {
+  if (!results.length) {
+    note = "No trials to export yet.";
+    return;
+  }
+const header = "trial,condition,rt,usable,anticipation,practice";
+const lines = results.map((row) =>
+  [row.trial, row.condition, row.rt, row.usable, row.anticipation, row.practice].join(",")
+);
+
+  const blob = new Blob([header + "\n" + lines.join("\n") + "\n"], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+a.download = "rt-week05.csv";  a.click();
+  URL.revokeObjectURL(a.href);
+  note = "CSV downloaded. Drag it into data/ in VS Code.";
+}
+    </script>
+
+    <script>
+      const STORE = "psych302-week2-rt-sketch";
+      const defaultSketch = document.getElementById("defaultSketch").textContent.replace(/^\n/, "");
+      const codeInput = document.getElementById("codeInput");
+      const codeHl = document.getElementById("codeHl");
+      const codeGutter = document.getElementById("codeGutter");
+      const preview = document.getElementById("preview");
+      const copyNote = document.getElementById("copyNote");
+      const p5Url = new URL("vendor/p5.min.js", window.location.href).href;
+      const KEYWORDS = new Set([
+        "let", "const", "var", "function", "return", "if", "else", "for", "while",
+        "do", "new", "typeof", "instanceof", "true", "false", "null", "undefined",
+        "break", "continue", "this", "in", "of",
+      ]);
+
+      function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      function span(kind, text) {
+        return `<span class="tok-${kind}">${escapeHtml(text)}</span>`;
+      }
+
+      function highlightJS(src) {
+        let out = "";
+        let i = 0;
+        while (i < src.length) {
+          if (src[i] === "/" && src[i + 1] === "/") {
+            const stop = src.indexOf("\n", i);
+            const end = stop === -1 ? src.length : stop;
+            out += span("cmt", src.slice(i, end));
+            i = end;
+            continue;
+          }
+          const quote = src[i];
+          if (quote === '"' || quote === "'") {
+            let j = i + 1;
+            while (j < src.length && src[j] !== quote) {
+              if (src[j] === "\\") j += 2;
+              else j += 1;
+            }
+            if (j < src.length) j += 1;
+            out += span("str", src.slice(i, j));
+            i = j;
+            continue;
+          }
+          if (/[0-9]/.test(src[i]) && (i === 0 || !/[\w$]/.test(src[i - 1]))) {
+            let j = i + 1;
+            while (j < src.length && /[0-9.]/.test(src[j])) j += 1;
+            out += span("num", src.slice(i, j));
+            i = j;
+            continue;
+          }
+          if (/[A-Za-z_$]/.test(src[i])) {
+            let j = i + 1;
+            while (j < src.length && /[\w$]/.test(src[j])) j += 1;
+            const word = src.slice(i, j);
+            let k = j;
+            while (k < src.length && /\s/.test(src[k])) k += 1;
+            if (KEYWORDS.has(word)) out += span("kw", word);
+            else if (src[k] === "(") out += span("fn", word);
+            else out += escapeHtml(word);
+            i = j;
+            continue;
+          }
+          out += escapeHtml(src[i]);
+          i += 1;
+        }
+        return out;
+      }
+
+      function paintEditor() {
+        const src = codeInput.value;
+        const lines = src.split("\n");
+        codeGutter.textContent = lines.map((_, n) => String(n + 1)).join("\n");
+        codeHl.innerHTML = highlightJS(src) + (src.endsWith("\n") ? "\n" : "");
+      }
+
+      function syncScroll() {
+        codeHl.scrollTop = codeInput.scrollTop;
+        codeHl.scrollLeft = codeInput.scrollLeft;
+        codeGutter.scrollTop = codeInput.scrollTop;
+      }
+
+      function runPreview() {
+        const source = codeInput.value;
+        localStorage.setItem(STORE, source);
+        preview.srcdoc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="${p5Url}"><\/script>
+  <style>html,body{margin:0;background:#07090d;color:#f3efe6} canvas{display:block;margin:0 auto}</style>
+</head>
+<body>
+<script>
+${source}
+<\/script>
+</body>
+</html>`;
+        preview.addEventListener("load", () => preview.focus(), { once: true });
+      }
+
+      codeInput.value = localStorage.getItem(STORE) || defaultSketch;
+      paintEditor();
+      document.getElementById("runBtn").addEventListener("click", runPreview);
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        localStorage.removeItem(STORE);
+        codeInput.value = defaultSketch;
+        paintEditor();
+        syncScroll();
+        runPreview();
+        copyNote.textContent = "Default sketch restored.";
+      });
+      document.getElementById("copyBtn").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(codeInput.value);
+          copyNote.textContent = "Sketch copied. In VS Code, open rt/rt.html and replace the script with this.";
+        } catch (err) {
+          copyNote.textContent = "Copy failed. Select the text and copy it yourself.";
+        }
+      });
+      codeInput.addEventListener("input", () => {
+        localStorage.setItem(STORE, codeInput.value);
+        paintEditor();
+        syncScroll();
+      });
+      codeInput.addEventListener("scroll", syncScroll);
+      codeInput.addEventListener("keydown", (event) => {
+        if (event.key !== "Tab") return;
+        event.preventDefault();
+        const start = codeInput.selectionStart;
+        const end = codeInput.selectionEnd;
+        codeInput.value = codeInput.value.slice(0, start) + "  " + codeInput.value.slice(end);
+        codeInput.selectionStart = codeInput.selectionEnd = start + 2;
+        localStorage.setItem(STORE, codeInput.value);
+        paintEditor();
+      });
+      runPreview();
+    </script>
+  </body>
+</html>
